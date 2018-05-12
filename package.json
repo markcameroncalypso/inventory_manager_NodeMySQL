@@ -1,0 +1,24 @@
+{
+  "name": "BETA_inventory_manager_NodeMySQL",
+  "version": "1.0.0",
+  "description": "The app will take in orders from customers and deplete stock from the store's inventory.",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markcam1/inventory_manager_NodeMySQL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markcam1/inventory_manager_NodeMySQL/issues"
+  },
+  "homepage": "https://github.com/markcam1/inventory_manager_NodeMySQL#readme",
+  "dependencies": {
+    "inquirer": "^5.2.0",
+    "mysql": "^2.15.0"
+  }
+}
