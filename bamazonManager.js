@@ -19,7 +19,7 @@ inquirer
     name: "manager",
     type: "rawlist",
     message: "Please choose an option:",
-    choices: [ "View Products for Sale","View Low Inventory", "Add to Inventory", "Add New Product"]
+    choices: [ "View Products for Sale","View Low Inventory", "Add to Inventory", "Add New Product", "Exit"]
     })
     .then(function(answer) {
         if (answer.manager == "View Products for Sale") {
@@ -33,6 +33,9 @@ inquirer
         }
         if (answer.manager == "Add New Product") {
             addProduct();
+        }
+        if (answer.manager == "Exit") {
+            connection.end();
         }
     });
 }
@@ -108,14 +111,14 @@ const addInventory = () => {
                     connection.query(
                         "UPDATE products SET ? WHERE ?",
                         [
-                        {stock_quantity: newQty},
-                        { item_id: chosenItem.item_id}
+                            {stock_quantity: newQty},
+                            { item_id: chosenItem.item_id}
                         ],
                         function(error) {
                         if (error) throw err;
-                        console.log("\n--------------------------\nInventory update was successfully!");
-                        //start();
-                        readInventory();
+                            console.log("\n--------------------------\nInventory update was successfully!");
+                            //start();
+                            readInventory();
                         }
                     );
               }
@@ -132,7 +135,62 @@ const addInventory = () => {
 
 
 const addProduct = () => {
-    console.log("\naddProduct")
+    console.log("\nadd a Product")
     console.log("-----------------------------------");
-    //* If a manager selects `Add New Product`, it should allow the manager to add a completely new product to the store.
+    inquirer
+    .prompt([
+        {
+            name: "prod",
+            type: "input",
+            message: "Product name = "
+        },
+        {
+            name: "department",
+            type: "input",
+            message: "Department = "
+        },
+        {
+            name: "price",
+            type: "input",
+            message: "Unit wholesale price = ",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                  return true;
+                }
+                return false;
+              }
+        },
+        {
+            name: "units",
+            type: "input",
+            message: "Number of units to add = ",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                  return true;
+                }
+                return false;
+              }
+        },
+    ])
+    .then(function(answer) {
+
+        var dbSql = "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ?";
+        var inputArr = [
+            [answer.prod, answer.department, answer.price, answer.unit]
+        ]
+      
+        connection.query(dbSql,[inputArr], function(err, res) {
+            if (err) throw err;
+
+     
+            });
+
+            //readInventory();
+            start()
+
+        });
+        
+
+
+
   };

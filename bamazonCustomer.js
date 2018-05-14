@@ -51,7 +51,9 @@ connection.connect(function(err) {
             message: "How many would you like to buy?"
             }
         ])
-        .then(function(answer) {          
+        .then(function(answer) { 
+          
+          console.log(answer.choice);
 
             var chosenItem;
             for (var i = 0; i < results.length; i++) {
@@ -61,13 +63,18 @@ connection.connect(function(err) {
               }
             }
             if (chosenItem.stock_quantity - answer.qty > 0){
+
+      
+                newProdSalesInt = parseInt(chosenItem.product_sales) ;
                 let newQty = chosenItem.stock_quantity - answer.qty;
                 let totalPrice = answer.qty * chosenItem.price;
+                newProdSalesInt += parseInt(totalPrice);
+
                 connection.query(
                     "UPDATE products SET ? WHERE ?",
                     [
-                      {stock_quantity: newQty},
-                      { item_id: chosenItem.item_id}
+                      {stock_quantity: newQty, product_sales : newProdSalesInt},
+                      { item_id: chosenItem.item_id},
                     ],
                     function(error) {
                       if (error) throw err;
@@ -89,4 +96,3 @@ connection.connect(function(err) {
         });
     });
   }
-  
