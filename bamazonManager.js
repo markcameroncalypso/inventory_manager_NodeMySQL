@@ -1,12 +1,7 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const connection = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "",
-  database: "bamazon"
-});
+const connection = require("./connect.js");
+
 
 connection.connect(function(err) {
     if (err) throw err;
@@ -52,8 +47,6 @@ function readInventory() {
 }
 
 const lowInventory = () => {
-    console.log("\nlow inventory")
-    console.log("-----------------------------------");
     connection.query("SELECT * FROM products where stock_quantity < 5", function(err, res) {
       if (err) throw err;
       for (var i = 0; i < res.length; i++) {
@@ -131,12 +124,7 @@ const addInventory = () => {
       });
     }
  
-
-
-
 const addProduct = () => {
-    console.log("\nadd a Product")
-    console.log("-----------------------------------");
     inquirer
     .prompt([
         {
@@ -173,24 +161,13 @@ const addProduct = () => {
         },
     ])
     .then(function(answer) {
-
         var dbSql = "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ?";
         var inputArr = [
             [answer.prod, answer.department, answer.price, answer.unit]
         ]
-      
         connection.query(dbSql,[inputArr], function(err, res) {
             if (err) throw err;
-
-     
             });
-
-            //readInventory();
             start()
-
         });
-        
-
-
-
   };

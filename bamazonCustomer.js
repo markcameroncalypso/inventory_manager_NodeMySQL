@@ -1,18 +1,19 @@
-const mysql = require("mysql");
+// const mysql = require("mysql");
 const inquirer = require("inquirer");
-const connection = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "",
-  database: "bamazon"
-});
+const connection = require("./connect.js");
+
+// const connection = mysql.createConnection({
+//   host: "localhost",
+//   port: 3306,
+//   user: "root",
+//   password: "",
+//   database: "bamazon"
+// });
 
 
 connection.connect(function(err) {
     if (err) throw err;
     readInventory();
-    console.log("connection")
   });
   
   function readInventory() {
@@ -62,7 +63,7 @@ connection.connect(function(err) {
                 chosenItem = results[i];
               }
             }
-            if (chosenItem.stock_quantity - answer.qty > 0){
+            if (chosenItem.stock_quantity - answer.qty >= 0){
 
       
                 newProdSalesInt = parseInt(chosenItem.product_sales) ;
