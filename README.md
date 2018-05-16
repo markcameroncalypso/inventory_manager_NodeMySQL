@@ -7,6 +7,8 @@ The application functionality includes:
 3. Allowing user/manager to view and add to inventory,
 4. Displays sales data to the user/manager. 
 
+[Video Demonstration](https://youtu.be/Q25t5P_MOGs) - this a demo of the full application
+
 
 ![????????](https://github.com/markcam1/liri-node-app/blob/master/media/liri_node.png)
 
@@ -36,10 +38,11 @@ _The relevant JavaScript files_:
  ```
 - If you do not have this installed, see the link to MySQL Tools [below](#tools) and install on your local system.
 - Change your connection.js file to use the appropriate configurations. 
+
+![mysql-connection](https://github.com/markcam1/inventory_manager_NodeMySQL/blob/beta_im/media/mysql_connect.png)
+
 - Use your MySQL GUI or command-line application and run the SQL statement from the [DB file](#) or from the SQL statement below. 
 - Insert data into the tables. Please create your own data or use my [csv file](#).
-
-![mysql-connection](#)
 
 
 ```
@@ -107,7 +110,7 @@ If you are creating a repository from scratch, please see the packages I used fo
 
 ### Usage
 
-1. Customer View
+1. **Customer View**
 - open a terminal in the root of your project (I use git bash as my terminal of choice)
 - run the command below to start the customer app
 
@@ -117,17 +120,28 @@ If you are creating a repository from scratch, please see the packages I used fo
 - choose and item and the number of units
 - the app should display the total cost of the purchase
 
-Video of Customer App
-[demo customer](https://youtu.be/Q25t5P_MOGs)
+2.  **Manager View**
+- In the root of your project, run the command below to start the Manager app
 
+> node bamazonManager.js
 
-2.  Manager View
-- In the root of your project, run the command below to start the customer app
+- Menu options are displayed
+- *View Products for Sale:* the app shows every available item: the item IDs, names, prices, and quantities
+- *View Low Inventory:* list all items with an inventory count lower than five
+- *Add to Inventory:* allows user to "add more" inventory to current products
+- *Add New Product:* allows the user to add a new product
 
-> node 
+3.  **Supervisor View**
+- In the root of your project, run the command below to start the supervisor app
 
-3.  Supervisor View
+> node bamazonSupervisor.js
 
+- Menu options are displayed
+- *View Product Sales by Department*: displays a summarized table in their terminal/bash window.
+
+![supervisor-table](#)
+
+- *Create New Department:* allows the user to add a new department
 
 
 ## Built With <a name="tools"></a>
@@ -135,7 +149,7 @@ Video of Customer App
 * [mysql node](https://www.npmjs.com/package/mysql) - This is a node.js driver for mysql. 
 * [inquirer](https://www.npmjs.com/package/inquirer) - A collection of common interactive command line user interfaces.
 * [Node.js](https://nodejs.org/en/) - a JavaScript runtime built on Chrome's V8 JavaScript engine.
-* [console.table](https://www.npmjs.com/package/console.table) - Adds console.table method for convenience.
+* [console.table](https://www.npmjs.com/package/console.table) - Adds console.table method to Node for convenience.
 
 
 ## Contributing
